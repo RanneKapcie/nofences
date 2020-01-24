@@ -26,7 +26,6 @@ SESSION_COOKIE_SECURE = False
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '$=$=f)q2l(453r+n!29=zw2-6)4y+nesl@+=ya8-%^&mw*sp1+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
