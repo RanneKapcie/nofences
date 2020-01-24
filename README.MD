@@ -7,3 +7,4 @@ Django 2
 PostgreSQL 9
 jQuery
 Bootstrap
+Leaflet
