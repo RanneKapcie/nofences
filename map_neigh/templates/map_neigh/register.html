@@ -74,6 +74,9 @@ var buildings = $.ajax({
         style: function(feature){
           return {color: "#2c65c1", fillColor: "4774bc", weight: 2};
         },
+        onEachFeature: function(feature){
+          changeValue(feature.properties.pk)
+        }
       }).addTo(map);
     }
   });
