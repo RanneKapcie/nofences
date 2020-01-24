@@ -1,0 +1,15 @@
+{% extends "map_neigh/home.html" %}
+
+{% block content %}
+
+<div class="container">
+  <form method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button class="btn btn-primary" type="submit">Zaloguj</button>
+  </form>
+
+  Nie masz konta? <a href="/register"><strong>Zarejestruj się.</strong></a>
+</div>
+
+{% endblock %}

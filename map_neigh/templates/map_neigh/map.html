@@ -1,0 +1,53 @@
+{% extends "map_neigh/home.html" %}
+{% block content %}
+  <div id='map'></div>
+
+  <script>
+    //osm layer
+    var osm =L.tileLayer('https://api.mapbox.com/styles/v1/rannekapcie00/cjseg2i0p0ju41gphhq62t1h4/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoicmFubmVrYXBjaWUwMCIsImEiOiJjamY4MzNyM3Qyb3ZtMzFrN3ltMnNkNTJqIn0.bus9unBLrRQ4SAmFaShBMg',
+    {
+      maxZoom: 19,
+      attribution: "Data by OpenStreetMap"
+    });
+    //creating map object
+    var map = new L.map('map', {
+      center: new L.LatLng(52.474949, 16.912119),
+      zoom: 16.0,
+      layers: [osm],
+      zoomControl: true
+    });
+
+    //locator button
+    var locator = L.control.locate({
+      position: 'topleft',
+      strings: {
+        title: 'Zlokalizuj'
+      }
+    }).addTo(map);
+
+    $.ajax({
+      type:"GET",
+      url: "geojson",
+      dataType: 'json',
+      success: function(response){
+        layer = L.geoJson(response, {
+          style: function(feature){
+            return {color: "#2c65c1", fillColor: "4774bc", weight: 2};
+          },
+          onEachFeature: function(feature, layer){
+            var address = feature.properties.address;
+            var type = feature.properties.building_type;
+            var html = "<strong>" + address + "</strong>" + "<br>" + "<strong>" + type + "</strong>";
+            layer.bindPopup(html);
+          }
+        }).addTo(map);
+      }
+    });
+    
+    var scale_bar = L.control.scale({
+      imperial: false,
+      position: 'bottomright',
+    }).addTo(map);
+
+  </script>
+{% endblock %}

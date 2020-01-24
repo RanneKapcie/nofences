@@ -1,0 +1,21 @@
+{% extends "map_neigh/home.html" %}
+
+{% include "map_neigh/includes/navbar.html" %}
+
+<form action="register/" method="post">
+  <h2>User name</h2><br>
+  <input type='text' name='username'>
+  <br>
+  <h2>E-mail address</h2>
+  <input type='text' name='email'>
+  <br>
+  <h2>Choose Your district</h2>
+  <select name='district'>
+    <option value='Piatkowo'>Piątkowo</option>
+    <option value='Morasko'>Morasko</option>
+  <input type="submit" value="Zarejestruj">
+
+  <div class='container'>
+    <div id='map'></div>
+  </div>
+</form>
