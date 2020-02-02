@@ -65,7 +65,13 @@ function changeValue(value){
     }
   }).addTo(map);
 
-var buildings = $.ajax({
+  function onFeature(feature, layer) {
+    layer.on('click', function(e){
+      document.getElementById('id_address').value = parseInt(feature.properties.pk)
+    })
+  }
+
+$.ajax({
     type:"GET",
     url: "../geojson",
     dataType: 'json',
@@ -74,9 +80,7 @@ var buildings = $.ajax({
         style: function(feature){
           return {color: "#2c65c1", fillColor: "4774bc", weight: 2};
         },
-        onEachFeature: function(feature){
-          changeValue(feature.properties.pk)
-        }
+        onEachFeature: onFeature
       }).addTo(map);
     }
   });
