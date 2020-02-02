@@ -26,7 +26,7 @@ class NewUserForm(UserCreationForm):
     username = forms.CharField(label='Nazwa użytkownika', max_length=50)
     email = forms.CharField(label='Email', max_length=100)
     district = forms.ChoiceField(widget=forms.RadioSelect, choices=CustomUserModel.district_choices)
-    address = forms.IntegerField(label='Adres')
+    address = forms.IntegerField(label='Adres', widget=forms.HiddenInput())
     password1 = forms.CharField(label='Hasło', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Powtórnie wprowadź hasło', widget=forms.PasswordInput)
 
