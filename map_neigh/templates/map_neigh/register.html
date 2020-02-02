@@ -69,6 +69,8 @@ function changeValue(value){
     layer.on('click', function(e){
       document.getElementById('id_address').value = parseInt(feature.properties.pk)
     })
+    var html = "<strong> Wybrałeś ten obiekt </strong>"
+    layer.bindPopup(html)
   }
 
 $.ajax({
