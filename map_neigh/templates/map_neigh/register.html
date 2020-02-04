@@ -3,14 +3,6 @@
 
 <!--jQuery scripts -->
 <script>
-$(document).ready(function(){
-  var setApproveButton = document.getElementById('approve_address')
-  $('#approve_address').click(function()
-  {
-    changeValue(3);
-    setApproveButton.id = "approve2"
-  });
-});
 </script>
 
 <div class='container'>
@@ -31,8 +23,6 @@ $(document).ready(function(){
     </br>
       <button class="btn btn-primary" type="submit">Zarejestruj</button>
     </form>
-    <button class="btn btn-success" id="approve_address" style="position: relative; top:-6rem">Zatwierdź wybór</button>
-    <br>
     <br>
     Jeżeli masz już konto <a href="/login"><strong>zaloguj</strong></a> się.
   </div>
