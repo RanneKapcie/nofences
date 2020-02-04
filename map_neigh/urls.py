@@ -7,4 +7,6 @@ urlpatterns = [
     url("register/", views.register, name='register'),
     url("logout/", views.logout_request, name='logout'),
     url("login/", views.login_request, name='login'),
+    url("add/", views.add_announcement, name='add'),
+    
 ]

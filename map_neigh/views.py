@@ -8,7 +8,7 @@ import json, ast
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
-from .forms import NewUserForm
+from .forms import NewUserForm, NewAnnouncementForm
 
 # Create your views here.
 def index(request):
@@ -71,3 +71,29 @@ def login_request(request):
     return render(request=request,
                     template_name="map_neigh/login.html",
                     context={"form":form})
+
+def add_announcement(request):
+    if request.user.is_authenticated:
+        if request.method=='POST':
+            username = None
+            form = NewAnnouncementForm(request.POST)
+            if form.is_valid():
+                announcement = form.save()
+                username = request.user.username
+                announcement.user_name = username
+                announcement.building_id = request.user.address
+                announcement.save(commit=True)
+                messages.success(request, 'Dodano ogłoszenie')
+                return redirect("map_neigh:index")
+            else:
+                for msg in form.error_messages:
+                    messages.error(request, str(msg) + ": " + str(form.error_messages[msg]))
+
+                return render(request = request,
+                              template_name = "map_neigh/register.html",
+                              context={"form":form})
+
+        form = NewAnnouncementForm
+        return render(request = request,
+                      template_name = "map_neigh/register.html",
+                      context={"form":form})
