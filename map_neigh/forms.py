@@ -2,25 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import CustomUserModel, Buildings, Announcement
 from django.contrib.gis import forms
-"""
-class NewUserForm(UserCreationForm):
 
-    district = forms.ChoiceField(widget=forms.RadioSelect, choices=CustomUserModel.district_choices)
-
-    class Meta(UserCreationForm):
-        model = CustomUserModel
-        fields = ('username', 'email', 'district', 'address', 'password1', 'password2')
-
-    def save(self, commit=True):
-        user = super(NewUserForm, self).save(commit=False)
-        user.email = self.cleaned_data['email']
-        user.district = self.cleaned_data['district']
-        user.address = self.cleaned_data['address']
-
-        if commit:
-            user.save()
-        return user
-"""
 class NewUserForm(UserCreationForm):
 
     username = forms.CharField(label='Nazwa użytkownika', max_length=50)
@@ -65,5 +47,5 @@ class NewAnnouncementForm(forms.Form):
         announcement.price = self.cleaned_data['price']
 
         if commit:
-            user.save()
-            
+            announcement.save()
+        return announcement
