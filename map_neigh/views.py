@@ -90,10 +90,10 @@ def add_announcement(request):
                     messages.error(request, str(msg) + ": " + str(form.error_messages[msg]))
 
                 return render(request = request,
-                              template_name = "map_neigh/register.html",
+                              template_name = "map_neigh/add.html",
                               context={"form":form})
 
         form = NewAnnouncementForm
         return render(request = request,
-                      template_name = "map_neigh/register.html",
+                      template_name = "map_neigh/add.html",
                       context={"form":form})

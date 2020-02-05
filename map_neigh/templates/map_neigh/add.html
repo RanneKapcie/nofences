@@ -1,0 +1,22 @@
+{% extends "map_neigh/home.html" %}
+{% block content %}
+
+<!--jQuery scripts -->
+<script>
+</script>
+
+<div class='container'>
+  <div id='inner'>
+    <br>
+    <form method="POST">
+
+      {% csrf_token %}
+      {{form.as_p}}
+
+    <button class="btn btn-primary" type="submit">Dodaj</button>
+    </form>
+    <br>
+  </div>
+</div>
+
+{% endblock %}
