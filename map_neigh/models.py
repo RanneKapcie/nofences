@@ -45,15 +45,15 @@ class Announcement(models.Model):
     offer ='offer'
 
     announcement_types = (
-    (announcement, 'announcement'),
-    (alert, 'alert'),
-    (offer, 'offer'),
+    (announcement, 'Announcement'),
+    (alert, 'Alert'),
+    (offer, 'Offer'),
     )
 
     id = models.AutoField(auto_created=True, primary_key=True, serialize=True, verbose_name='ID')
     text = models.CharField(max_length=1500, null=False, blank=False)
-    anouncement_type = models.CharField(max_length=12, choices=announcement_types, default=announcement)
+    announcement_type = models.CharField(max_length=12, choices=announcement_types, default=announcement)
     user_name = models.ForeignKey(CustomUserModel, on_delete=models.CASCADE)
-    date = models.DateField(auto_now=True)
+    date = models.DateTimeField(auto_now=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     building_id = models.ForeignKey(Buildings, on_delete=models.CASCADE)
