@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from map_neigh.models import Buildings
+from map_neigh.models import Buildings, CustomUserModel, Announcement
 from django.shortcuts import render_to_response, render, redirect
 from django.core.serializers import serialize
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
@@ -75,19 +75,19 @@ def login_request(request):
 def add_announcement(request):
     if request.user.is_authenticated:
         if request.method=='POST':
-            username = None
+            username = str(request.user.username)
+            user_object = CustomUserModel.objects.values_list('address', flat=True).get(username=username)
             form = NewAnnouncementForm(request.POST)
+            form.fields['user_name'].initial = username
+            form.fields['building_id'].initial = user_object
             if form.is_valid():
                 announcement = form.save()
-                username = request.user.username
-                announcement.user_name = username
-                announcement.building_id = request.user.address
-                announcement.save(commit=True)
                 messages.success(request, 'Dodano ogłoszenie')
                 return redirect("map_neigh:index")
             else:
-                for msg in form.error_messages:
-                    messages.error(request, str(msg) + ": " + str(form.error_messages[msg]))
+                for field in form.errors:
+                    for item in form.errors:
+                        messages.error(request, '{}: {}'.format(field,item))
 
                 return render(request = request,
                               template_name = "map_neigh/add.html",

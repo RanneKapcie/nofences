@@ -29,16 +29,18 @@ class NewUserForm(UserCreationForm):
             user.save()
         return user
 
-class NewAnnouncementForm(forms.Form):
+class NewAnnouncementForm(forms.ModelForm):
 
     text = forms.CharField(label='Treść ogłoszenia', max_length=1500)
-    anouncement_type = forms.ChoiceField(widget=forms.RadioSelect, choices=Announcement.announcement_types)
+    announcement_type = forms.ChoiceField(label='Typ ogłoszenia', widget=forms.RadioSelect, choices=Announcement.announcement_types)
     #user_name dodac do views przed savem i dodac w save (?)
     price = forms.DecimalField(label='Podaj oczekiwaną cenę, w przypadku darmowego ogłoszenia wpisz 0')
+    user_name = forms.CharField(widget=forms.HiddenInput())
+    building_id = forms.IntegerField(widget=forms.HiddenInput())
 
     class Meta(forms.Form):
         model = Announcement
-        fields = ('text', 'announcement_type', 'user_name', 'date', 'price', 'building_id')
+        fields = ('text', 'announcement_type', 'price', 'user_name', 'building_id')
 
     def save(self, commit=True):
         announcement = super(NewAnnouncementForm, self).save(commit=False)
