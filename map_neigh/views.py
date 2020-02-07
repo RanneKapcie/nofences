@@ -75,13 +75,15 @@ def login_request(request):
 def add_announcement(request):
     if request.user.is_authenticated:
         if request.method=='POST':
-            username = str(request.user.username)
-            user_object = CustomUserModel.objects.values_list('address', flat=True).get(username=username)
+            username = str(request.user.get_username())
+            user_name = CustomUserModel.objects.get(username=username)
+            user_address = CustomUserModel.objects.values_list('address', flat=True).get(username=username)
+            user_object = Buildings.objects.get(id=user_address)
             form = NewAnnouncementForm(request.POST)
-            form.fields['user_name'].initial = username
-            form.fields['building_id'].initial = user_object
             if form.is_valid():
-                announcement = form.save()
+                announcement = form.save(commit=False)
+                announcement.user_name = user_name
+                announcement.building_id = user_object
                 messages.success(request, 'Dodano ogłoszenie')
                 return redirect("map_neigh:index")
             else:
