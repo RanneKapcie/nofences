@@ -84,6 +84,7 @@ def add_announcement(request):
                 announcement = form.save(commit=False)
                 announcement.user_name = user_name
                 announcement.building_id = user_object
+                announcement = form.save(commit=True)
                 messages.success(request, 'Dodano ogłoszenie')
                 return redirect("map_neigh:index")
             else:
@@ -99,3 +100,9 @@ def add_announcement(request):
         return render(request = request,
                       template_name = "map_neigh/add.html",
                       context={"form":form})
+
+def get_json(request):
+    announcements = Announcement.objects.all()
+    ann_json = serialize('json', announcements)
+
+    return HttpResponse(ann_json)

@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from map_neigh.views import get_geojson
+from map_neigh.views import get_geojson, get_json
 
 app_name = "map_neigh"
 
@@ -24,4 +24,5 @@ urlpatterns = [
     path('authenticate/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
     path('geojson/', get_geojson),
+    path('json/',get_json),
 ]
