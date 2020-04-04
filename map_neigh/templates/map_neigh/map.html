@@ -25,6 +25,16 @@
       }
     }).addTo(map);
 
+announcements_list = [];
+    $.ajax({
+      type:"GET",
+      url:"json",
+      dataType:"json",
+      success: function(response){
+        announcements_list.push(response);
+      }
+    });
+
     $.ajax({
       type:"GET",
       url: "geojson",
@@ -37,13 +47,27 @@
           onEachFeature: function(feature, layer){
             var address = feature.properties.address;
             var type = feature.properties.building_type;
-            var html = "<strong>" + address + "</strong>" + "<br>" + "<strong>" + type + "</strong>";
+            for (var i = 0; i < announcements_list.length; i++){
+              var obj = announcements_list[i];
+              for (var key in obj){
+                var attrName = key;
+                var value = obj[key];
+                if (value.fields.building_id == feature.properties.pk){
+                    var txt = value.fields.text;
+                    var date = value.fields.date;
+                    var html = address + "<br>Treść ogłoszenia: " + txt + "<br>Data dodania: " + date;
+                  }
+                else {
+                  var html = address + "<br>Nazwa użytkownika" + type;
+                }
+              }
+            }
             layer.bindPopup(html);
           }
         }).addTo(map);
       }
     });
-    
+
     var scale_bar = L.control.scale({
       imperial: false,
       position: 'bottomright',
