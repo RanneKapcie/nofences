@@ -106,3 +106,9 @@ def get_json(request):
     ann_json = serialize('json', announcements)
 
     return HttpResponse(ann_json)
+
+def profile(request):
+    if not request.user.is_authenticated:
+        return redirect("map_neigh:login")
+    person = CustomUserModel.objects.get(username=request.user)
+    return render(request, 'map_neigh/profile.html', {'person':person})
