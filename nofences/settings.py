@@ -21,6 +21,7 @@ AUTH_USER_MODEL = "map_neigh.CustomUserModel"
 #for development purposes:
 CSRF_COOKIE_SECURE = False
 SESSION_COOKIE_SECURE = False
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #during development
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
@@ -37,7 +38,6 @@ SITE_ID = 1
 
 INSTALLED_APPS = [
     'django.contrib.admin',
-    'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'map_neigh',
+    'django.contrib.auth',
 ]
 
 MIDDLEWARE = [
