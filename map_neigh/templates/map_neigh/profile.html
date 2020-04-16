@@ -3,8 +3,13 @@
 {% block content %}
 
 <div class="container">
-  <h2>Kokpit użytkownika {{ user.username }}</h2>
-
+  <h3>Kokpit użytkownika {{ user.username }}</h3></br></br>
+  <h5>Przypisany adres: {{ user.address }} </br></br>
+      Id użytkownika: {{ user.id }} </br></br>
+      Dzielnica/osiedle: {{ user.district }} </br></br>
+      Przypisany adres E-mail: {{ user.email }} </br></br>
+  </h5>
+  <a href='change_password/'>Zmiana hasła</a>
 </div>
 
 {% endblock %}
