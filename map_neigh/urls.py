@@ -13,4 +13,6 @@ urlpatterns = [
     url('profile/', views.profile, name='profile'),
     path('password_reset/', auth_views.PasswordResetView.as_view(template_name='registration/password_reset.html', success_url='done/')),
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='registration/password_reset_d.html')),
+    path('password_change/', auth_views.PasswordChangeView.as_view(template_name='registration/password_change.html', success_url='done/')),
+    path('password_change/done/', auth_views.PasswordChangeDoneView.as_view(template_name='registration/password_change_done.html')),
 ]
