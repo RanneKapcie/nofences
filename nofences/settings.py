@@ -44,12 +44,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.gis',
     'django.contrib.sites',
-    #'users.apps.UsersConfig',
-    'allauth',
+    #'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'map_neigh',
     'django.contrib.auth',
+    'django_messages',
 ]
 
 MIDDLEWARE = [
@@ -79,6 +79,11 @@ TEMPLATES = [
         },
     },
 ]
+
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+)
 
 WSGI_APPLICATION = 'nofences.wsgi.application'
 
@@ -140,4 +145,4 @@ STATICFILES_DIRS = [STATIC_DIR,]
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
 
-LOGIN_URL = '/map_neigh/user_login/'
+LOGIN_URL = '/login/'

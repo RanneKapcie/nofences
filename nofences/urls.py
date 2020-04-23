@@ -25,4 +25,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('geojson/', get_geojson),
     path('json/',get_json),
+    path('messages/', include('django_messages.urls'))
 ]
